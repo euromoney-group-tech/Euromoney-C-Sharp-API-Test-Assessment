@@ -76,7 +76,7 @@
 
     Include your full name in the zip file i.e. “<your-name>.euromoney.api.tests.zip”. 
 
-
+    If your tests are on Github or another repository, please set it to Private 
 
 
 
