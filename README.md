@@ -54,11 +54,11 @@
 
 ## Further Notes
 
-    - Please clone this repo, create a branch and then submit your effort as a PR  to this repo
+    - Please clone this repo, create a branch and then submit your effort as a pull request to this repo
     
     - Required Nuget Packages: Specflow for the BDD Feature file.  
 
-    - For the Test Runner choose either Nunit or Xunit. 
+    - For the test runner choose either Nunit or Xunit. 
 
     - Any other packages you would like to use feel free to use them.
 
