@@ -105,6 +105,26 @@ namespace EuromoneyProject
 
         }
 
+        [Then(@"I get following locations with id and name")]
+        public void ThenIGetFollowingLocationsWithIdAndName(Table table)
+        {
+
+            //_responseLocations
+            var locTable = new Dictionary<int, string>();
+
+            int i = 0;
+            foreach(var row in table.Rows)
+            {
+                var tableId = Convert.ToInt32(row[0]);
+                var tableName = row[1];
+                var actualId =  _responseLocations[i].id;
+                var actualName = _responseLocations[i].name;
+
+                Assert.AreEqual(tableId, actualId);
+                i++;
+            }
+
+        }
 
 
         [When(@"I call the api with locations and '(.*)' and a token")]

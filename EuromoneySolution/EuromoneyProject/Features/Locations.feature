@@ -21,10 +21,27 @@ Scenario Outline: Get all locations and assert OK/200
 	And I get a <status> status and a <token>
 	When I call the api with locations and '<id>' and a token
 	Then I get a <status> from locations
+	And I get following locations with id and name
+	| id | name        |
+	| 1  | Location001 |
+	| 2  | Location002 |
+	| 3  | Location003 |
 
 	Examples: 
 	| username         | password | status | token | numoflocations | id |
 	| techie@email.com | techie   | 200    | true  | 3              |    |
+
+
+
+Scenario Outline: Get single location and assert OK/200
+	Given I am connecting to the api to login
+	And I login using '<username>' and '<password>'
+	And I get a <status> status and a <token>
+	When I call the api with locations and '<id>' and a token
+	Then I get a <status> from locations
+
+	Examples: 
+	| username         | password | status | token | numoflocations | id |
 	| techie@email.com | techie   | 200    | true  | 1              | 1  |
 
 
