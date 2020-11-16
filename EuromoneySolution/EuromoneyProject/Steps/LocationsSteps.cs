@@ -166,7 +166,6 @@ namespace EuromoneyProject
 
             IRestResponse response = _restClient.Execute(_request);
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
-
         }
 
         [When(@"I PUT to (.*) with name '(.*)'"), Order(2)]
@@ -189,13 +188,14 @@ namespace EuromoneyProject
         }
 
 
-        [When(@"I DELETE with id (.*)"), Order(3)]
+        [When(@"I DELETE with id (.*)")]
+        [Then(@"I DELETE with id (.*)")]
         public void WhenIDeleteWithId(int idToSend)
         {
             _url = "http://localhost:8000/locations/" + idToSend;
             _restClient = new RestClient(_url);
             _request = new RestRequest(Method.DELETE);
-            _restClient.AddDefaultHeader("Authorization", string.Format("Bearer {0}", _scenarioContext["token"]));
+            _restClient.AddDefaultHeader("Authorization", string.Format("Bearer {0}", _responseLogin.access_token));
 
             response = _restClient.Execute(_request);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
@@ -208,6 +208,14 @@ namespace EuromoneyProject
             Assert.AreEqual(statusExpected, statusActual);
 
         }
+
+        [Given(@"I have location (.*) '(.*)' available in the API")]
+        public void IHaveLocationAvailableInTheApi(int id, string name)
+        {
+            WhenIPOSTALocationWithAndName(id, name);
+
+        }
+
 
     }
 }
