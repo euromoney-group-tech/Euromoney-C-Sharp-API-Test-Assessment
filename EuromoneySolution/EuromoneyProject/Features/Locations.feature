@@ -1,0 +1,91 @@
+﻿Feature: Locations
+	test locations endpoint after logging in
+	with GET/POST/PUT/DELETE HTTP methods
+	
+
+@locations
+Scenario Outline: Login to API with several credentials
+	Given I am connecting to the api to login
+	When I login using '<username>' and '<password>'
+	Then I get a <status> status and a <token>
+
+	Examples: 
+	| username         | password | status | token |
+	| techie@email.com | techie   | 200    | true  |
+    | fail@fail.com    | fail     | 401    | false |
+
+
+Scenario Outline: Get all locations and assert OK/200
+	Given I am connecting to the api to login
+	And I login using '<username>' and '<password>'
+	And I get a <status> status and a <token>
+	When I call the api with locations and '<id>' and a token
+	Then I get a <status> from locations
+	And I get following locations with id and name
+	| id | name        |
+	| 1  | Location001 |
+	| 2  | Location002 |
+	| 3  | Location003 |
+
+	Examples: 
+	| username         | password | status | token | numoflocations | id |
+	| techie@email.com | techie   | 200    | true  | 3              |    |
+
+Scenario Outline: Get a single location by id and assert name,id and status as OK/200  
+	Given I am connecting to the api to login
+	And I login using '<username>' and '<password>'
+	And I get a <status> status and a <token>
+	When I call the api with locations and '<id>' and a token
+	Then I get a <status> from locations
+	And I expect <numoflocations> number of locations
+	And I expect '<id>' and '<locationname>' 
+
+	Examples: 
+	| username         | password | status | token | numoflocations | id | locationname |
+	| techie@email.com | techie   | 200    | true  | 1              | 1  | Location001  |
+
+
+Scenario Outline: POST a Location where “id” is "4" and “name” is "Location004", Then perform GET “locations/4”, assert “id” is “4”, “name” is “Locations004”, and Assert “OK” or “200” status.
+	Given I am connecting to the api to login
+	And I login using '<username>' and '<password>'
+	And I get a <status> status and a <token>
+	When I POST a location with <id> and name '<locationname>'
+	When I call the api with locations and '<id>' and a token
+	Then I get a <status> from locations
+	And I expect <numoflocations> number of locations
+	And I expect '<id>' and '<locationname>'
+	And I DELETE with id <id>
+
+	Examples: 
+	| username         | password | status | token | numoflocations | id | locationname |
+	| techie@email.com | techie   | 200    | true  | 1              | 4  | Location004  |
+
+
+Scenario Outline: PUT a Location where “id” is "4" and “name” is "Location05". Then perform GET “locations/4”, assert “id” is “4”, “name” is “Locations004”, and Assert “OK” or “200” status.
+	Given I am connecting to the api to login
+	And I login using '<username>' and '<password>'
+	And I get a <status> status and a <token>
+	And I have location <id> '<name>' available in the API
+	When I PUT to <id> with name '<namePut>'
+	When I call the api with locations and '<id>' and a token
+	Then I get a <status> from locations
+	And I expect <numoflocations> number of locations
+	And I expect '<id>' and '<namePut>'
+	And I DELETE with id <id>
+
+	Examples: 
+	| username         | password | status | token | numoflocations | id | namePut     | name        |
+	| techie@email.com | techie   | 200    | true  | 1              | 4  | Location005 | Location004 |
+
+
+@login
+Scenario Outline: DELETE operation for "locations/4" and Assert “OK” or “200” status
+	Given I am connecting to the api and I login using '<username>' and '<password>' and get <status>
+	And I have location <id> '<name>' available in the API
+	When I DELETE with id <id>
+	Then I get status <status>
+
+	Examples: 
+	| username         | password | status | id | name        |
+	| techie@email.com | techie   | 200    | 4  | Location004 |
+	| techie@email.com | techie   | 200    | 5  | Location005 |
