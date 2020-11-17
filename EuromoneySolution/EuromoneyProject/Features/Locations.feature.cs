@@ -75,11 +75,11 @@ namespace EuromoneyProject.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("logging to api with correct credentials")]
+        [NUnit.Framework.DescriptionAttribute("Login to API with several credentials")]
         [NUnit.Framework.CategoryAttribute("locations")]
         [NUnit.Framework.TestCaseAttribute("techie@email.com", "techie", "200", "true", null)]
         [NUnit.Framework.TestCaseAttribute("fail@fail.com", "fail", "401", "false", null)]
-        public virtual void LoggingToApiWithCorrectCredentials(string username, string password, string status, string token, string[] exampleTags)
+        public virtual void LoginToAPIWithSeveralCredentials(string username, string password, string status, string token, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "locations"};
@@ -93,7 +93,7 @@ namespace EuromoneyProject.Features
             argumentsOfScenario.Add("password", password);
             argumentsOfScenario.Add("status", status);
             argumentsOfScenario.Add("token", token);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("logging to api with correct credentials", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login to API with several credentials", null, tagsOfScenario, argumentsOfScenario);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -196,9 +196,9 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Get single location and assert OK/200")]
-        [NUnit.Framework.TestCaseAttribute("techie@email.com", "techie", "200", "true", "1", "1", null)]
-        public virtual void GetSingleLocationAndAssertOK200(string username, string password, string status, string token, string numoflocations, string id, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Get a single location by id and assert name,id and status as OK/200")]
+        [NUnit.Framework.TestCaseAttribute("techie@email.com", "techie", "200", "true", "1", "1", "Location001", null)]
+        public virtual void GetASingleLocationByIdAndAssertNameIdAndStatusAsOK200(string username, string password, string status, string token, string numoflocations, string id, string locationname, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
@@ -208,8 +208,9 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("token", token);
             argumentsOfScenario.Add("numoflocations", numoflocations);
             argumentsOfScenario.Add("id", id);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get single location and assert OK/200", null, tagsOfScenario, argumentsOfScenario);
-#line 36
+            argumentsOfScenario.Add("locationname", locationname);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get a single location by id and assert name,id and status as OK/200", null, tagsOfScenario, argumentsOfScenario);
+#line 34
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -229,29 +230,37 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 37
+#line 35
  testRunner.Given("I am connecting to the api to login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 38
+#line 36
  testRunner.And(string.Format("I login using \'{0}\' and \'{1}\'", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 39
+#line 37
  testRunner.And(string.Format("I get a {0} status and a {1}", status, token), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 40
+#line 38
  testRunner.When(string.Format("I call the api with locations and \'{0}\' and a token", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 41
+#line 39
  testRunner.Then(string.Format("I get a {0} from locations", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 40
+ testRunner.And(string.Format("I expect {0} number of locations", numoflocations), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 41
+ testRunner.And(string.Format("I expect \'{0}\' and \'{1}\'", id, locationname), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Get location by id and assert name,id and status as OK/200")]
-        [NUnit.Framework.TestCaseAttribute("techie@email.com", "techie", "200", "true", "1", "1", "Location001", null)]
-        public virtual void GetLocationByIdAndAssertNameIdAndStatusAsOK200(string username, string password, string status, string token, string numoflocations, string id, string locationname, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("POST a Location where “id” is \"4\" and “name” is \"Location004\", Then perform GET “" +
+            "locations/4”, assert “id” is “4”, “name” is “Locations004”, and Assert “OK” or “" +
+            "200” status.")]
+        [NUnit.Framework.TestCaseAttribute("techie@email.com", "techie", "200", "true", "1", "4", "Location004", null)]
+        public virtual void POSTALocationWhereIdIs4AndNameIsLocation004ThenPerformGETLocations4AssertIdIs4NameIsLocations004AndAssertOKOr200Status_(string username, string password, string status, string token, string numoflocations, string id, string locationname, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
@@ -262,7 +271,9 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("numoflocations", numoflocations);
             argumentsOfScenario.Add("id", id);
             argumentsOfScenario.Add("locationname", locationname);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get location by id and assert name,id and status as OK/200", null, tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("POST a Location where “id” is \"4\" and “name” is \"Location004\", Then perform GET “" +
+                    "locations/4”, assert “id” is “4”, “name” is “Locations004”, and Assert “OK” or “" +
+                    "200” status.", null, tagsOfScenario, argumentsOfScenario);
 #line 48
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -293,85 +304,21 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And(string.Format("I get a {0} status and a {1}", status, token), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 52
- testRunner.When(string.Format("I call the api with locations and \'{0}\' and a token", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 53
- testRunner.Then(string.Format("I get a {0} from locations", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 54
- testRunner.And(string.Format("I expect {0} number of locations", numoflocations), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 55
- testRunner.And(string.Format("I expect \'{0}\' and \'{1}\'", id, locationname), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("POST a Location where “id” is \"4\" and “name” is \"Location004\". Then perform GET “" +
-            "locations/4”, assert “id” is “4”, “name” is “Locations004”, and Assert “OK” or “" +
-            "200” status.")]
-        [NUnit.Framework.TestCaseAttribute("techie@email.com", "techie", "200", "true", "1", "4", "Location004", null)]
-        public virtual void POSTALocationWhereIdIs4AndNameIsLocation004_ThenPerformGETLocations4AssertIdIs4NameIsLocations004AndAssertOKOr200Status_(string username, string password, string status, string token, string numoflocations, string id, string locationname, string[] exampleTags)
-        {
-            string[] tagsOfScenario = exampleTags;
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("username", username);
-            argumentsOfScenario.Add("password", password);
-            argumentsOfScenario.Add("status", status);
-            argumentsOfScenario.Add("token", token);
-            argumentsOfScenario.Add("numoflocations", numoflocations);
-            argumentsOfScenario.Add("id", id);
-            argumentsOfScenario.Add("locationname", locationname);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("POST a Location where “id” is \"4\" and “name” is \"Location004\". Then perform GET “" +
-                    "locations/4”, assert “id” is “4”, “name” is “Locations004”, and Assert “OK” or “" +
-                    "200” status.", null, tagsOfScenario, argumentsOfScenario);
-#line 62
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 63
- testRunner.Given("I am connecting to the api to login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 64
- testRunner.And(string.Format("I login using \'{0}\' and \'{1}\'", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 65
- testRunner.And(string.Format("I get a {0} status and a {1}", status, token), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 66
  testRunner.When(string.Format("I POST a location with {0} and name \'{1}\'", id, locationname), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 67
+#line 53
  testRunner.When(string.Format("I call the api with locations and \'{0}\' and a token", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 68
+#line 54
  testRunner.Then(string.Format("I get a {0} from locations", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 69
+#line 55
  testRunner.And(string.Format("I expect {0} number of locations", numoflocations), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 70
+#line 56
  testRunner.And(string.Format("I expect \'{0}\' and \'{1}\'", id, locationname), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 71
+#line 57
  testRunner.And(string.Format("I DELETE with id {0}", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -398,7 +345,7 @@ this.ScenarioInitialize(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("PUT a Location where “id” is \"4\" and “name” is \"Location05\". Then perform GET “lo" +
                     "cations/4”, assert “id” is “4”, “name” is “Locations004”, and Assert “OK” or “20" +
                     "0” status.", null, tagsOfScenario, argumentsOfScenario);
-#line 78
+#line 64
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -418,34 +365,34 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 79
+#line 65
  testRunner.Given("I am connecting to the api to login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 80
+#line 66
  testRunner.And(string.Format("I login using \'{0}\' and \'{1}\'", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 81
+#line 67
  testRunner.And(string.Format("I get a {0} status and a {1}", status, token), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 82
+#line 68
  testRunner.And(string.Format("I have location {0} \'{1}\' available in the API", id, name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 83
+#line 69
  testRunner.When(string.Format("I PUT to {0} with name \'{1}\'", id, namePut), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 84
+#line 70
  testRunner.When(string.Format("I call the api with locations and \'{0}\' and a token", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 85
+#line 71
  testRunner.Then(string.Format("I get a {0} from locations", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 86
+#line 72
  testRunner.And(string.Format("I expect {0} number of locations", numoflocations), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 87
+#line 73
  testRunner.And(string.Format("I expect \'{0}\' and \'{1}\'", id, namePut), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 88
+#line 74
  testRunner.And(string.Format("I DELETE with id {0}", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -456,6 +403,7 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.DescriptionAttribute("DELETE operation for \"locations/4\" and Assert “OK” or “200” status")]
         [NUnit.Framework.CategoryAttribute("login")]
         [NUnit.Framework.TestCaseAttribute("techie@email.com", "techie", "200", "4", "Location004", null)]
+        [NUnit.Framework.TestCaseAttribute("techie@email.com", "techie", "200", "5", "Location005", null)]
         public virtual void DELETEOperationForLocations4AndAssertOKOr200Status(string username, string password, string status, string id, string name, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -472,7 +420,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("id", id);
             argumentsOfScenario.Add("name", name);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("DELETE operation for \"locations/4\" and Assert “OK” or “200” status", null, tagsOfScenario, argumentsOfScenario);
-#line 96
+#line 82
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -492,16 +440,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 97
+#line 83
  testRunner.Given(string.Format("I am connecting to the api and I login using \'{0}\' and \'{1}\' and get {2}", username, password, status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 98
+#line 84
  testRunner.And(string.Format("I have location {0} \'{1}\' available in the API", id, name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 99
+#line 85
  testRunner.When(string.Format("I DELETE with id {0}", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 100
+#line 86
  testRunner.Then(string.Format("I get status {0}", status), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

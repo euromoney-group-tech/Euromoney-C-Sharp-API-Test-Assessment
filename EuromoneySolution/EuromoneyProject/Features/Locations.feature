@@ -4,7 +4,7 @@
 	
 
 @locations
-Scenario Outline: logging to api with correct credentials
+Scenario Outline: Login to API with several credentials
 	Given I am connecting to the api to login
 	When I login using '<username>' and '<password>'
 	Then I get a <status> status and a <token>
@@ -31,21 +31,7 @@ Scenario Outline: Get all locations and assert OK/200
 	| username         | password | status | token | numoflocations | id |
 	| techie@email.com | techie   | 200    | true  | 3              |    |
 
-
-
-Scenario Outline: Get single location and assert OK/200
-	Given I am connecting to the api to login
-	And I login using '<username>' and '<password>'
-	And I get a <status> status and a <token>
-	When I call the api with locations and '<id>' and a token
-	Then I get a <status> from locations
-
-	Examples: 
-	| username         | password | status | token | numoflocations | id |
-	| techie@email.com | techie   | 200    | true  | 1              | 1  |
-
-
-Scenario Outline: Get location by id and assert name,id and status as OK/200  
+Scenario Outline: Get a single location by id and assert name,id and status as OK/200  
 	Given I am connecting to the api to login
 	And I login using '<username>' and '<password>'
 	And I get a <status> status and a <token>
@@ -59,7 +45,7 @@ Scenario Outline: Get location by id and assert name,id and status as OK/200
 	| techie@email.com | techie   | 200    | true  | 1              | 1  | Location001  |
 
 
-Scenario Outline: POST a Location where “id” is "4" and “name” is "Location004". Then perform GET “locations/4”, assert “id” is “4”, “name” is “Locations004”, and Assert “OK” or “200” status.
+Scenario Outline: POST a Location where “id” is "4" and “name” is "Location004", Then perform GET “locations/4”, assert “id” is “4”, “name” is “Locations004”, and Assert “OK” or “200” status.
 	Given I am connecting to the api to login
 	And I login using '<username>' and '<password>'
 	And I get a <status> status and a <token>
@@ -102,3 +88,4 @@ Scenario Outline: DELETE operation for "locations/4" and Assert “OK” or “2
 	Examples: 
 	| username         | password | status | id | name        |
 	| techie@email.com | techie   | 200    | 4  | Location004 |
+	| techie@email.com | techie   | 200    | 5  | Location005 |
