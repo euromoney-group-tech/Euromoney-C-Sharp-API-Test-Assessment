@@ -1,0 +1,74 @@
+#.Net packages #
+################
+packages
+
+# Visual Studio #
+###################
+*.suo
+*.v12.suo
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe	
+*.o
+*.so
+ 
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+ 
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+ 
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+/Tudubuddy.Web/Content/Images
+*.user
+/TuduBuddy.sln.ide
+/TuduBuddy.Model/obj
+/TuduBuddy.Model/bin
+/*.suo
+/Tudubuddy.Web/*.user
+/Tudubuddy.Web/node_modules
+/Tudubuddy.Web/Uploads
+/Tudubuddy.Web/Imagecache
+/Tudubuddy.Web/certificates
+/TuduBuddy.WebAPI/obj
+/TuduBuddy.WebAPI/bin
+/TuduBuddy.WebAPI/Properties
+/TuduBuddy.BusinessLogic/bin
+/TuduBuddy.BusinessLogic/obj
+/TuduBuddy.DataAccess/bin
+/TuduBuddy.DataAccess/obj
+/TuduBuddy.DataAccess.CrossCutting.Identity/obj
+/TuduBuddy.DataAccess.CrossCutting.Identity/bin
+/TuduBuddy.Entities/bin
+/TuduBuddy.Entities/obj
+/TuduBuddy.IoC/bin
+/TuduBuddy.IoC/obj
+/TuduBuddy.ViewModels/bin
+/TuduBuddy.ViewModels/obj
+/Tudubuddy.Scheduler/obj
+/Tudubuddy.Scheduler/bin
